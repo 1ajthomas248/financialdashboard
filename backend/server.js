@@ -132,16 +132,16 @@ app.post('/api/create_user_token', function (request, response, next) {
 
       if (PLAID_PRODUCTS.some(product => product.startsWith("cra_"))) {
         request.consumer_report_user_identity = {
-          date_of_birth: '1980-07-31',
-          first_name: 'Harry',
-          last_name: 'Potter',
-          phone_numbers: ['+16174567890'],
-          emails: ['harrypotter@example.com'],
+          date_of_birth: '2003-09-02',
+          first_name: 'AJ',
+          last_name: 'Thomas',
+          phone_numbers: ['+13014671400'],
+          emails: ['1ajthomas248@gmail.com'],
           primary_address: {
-            city: 'New York',
-            region: 'NY',
-            street: '4 Privet Drive',
-            postal_code: '11111',
+            city: 'Gaithersburg',
+            region: 'MD',
+            street: '910 Pointer Ridge Dr',
+            postal_code: '20878',
             country: 'US'
           }
         }
@@ -161,13 +161,13 @@ app.post(
       .then(async function () {
         const createRecipientResponse =
           await client.paymentInitiationRecipientCreate({
-            name: 'Harry Potter',
+            name: 'AJ Thomas',
             iban: 'GB33BUKB20201555555555',
             address: {
-              street: ['4 Privet Drive'],
-              city: 'Little Whinging',
-              postal_code: '11111',
-              country: 'GB',
+              street: ['910 Pointer Ridge Dr'],
+              city: 'Gaithersburg',
+              postal_code: '20878',
+              country: 'US',
             },
           });
         const recipientId = createRecipientResponse.data.recipient_id;
@@ -178,8 +178,8 @@ app.post(
             recipient_id: recipientId,
             reference: 'paymentRef',
             amount: {
-              value: 1.23,
-              currency: 'GBP',
+              value: 1.00,
+              currency: 'USD',
             },
           });
         prettyPrintResponse(createPaymentResponse);
